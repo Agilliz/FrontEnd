@@ -95,11 +95,13 @@ function Institucional() {
               }
             />
           </div>
+          <Fade>
           <div className="w-full flex items-center justify-center">
             <Container
             altura={"4vh"}
             corFundo={"#F4F6F9"}
             />
+            
             <Container
               tituloSessao={
                 <div>
@@ -186,7 +188,9 @@ function Institucional() {
                 </div>
               }
             />
+            
           </div>
+          </Fade>
               <Container altura={"1vh"} corFundo={"#F4F6F9"} />
           <div
             className="w-full flex items-center justify-center"
