@@ -163,25 +163,25 @@ function Institucional() {
                       fontSize: "24px",
                     }}
                   >
-                    <span>
+                    <h1>
                       A <span style={{ color: "#DE6600" }}>Agil Logistics</span>{" "}
                       foi criada com o propósito de
-                    </span>
-                    <span> aprimorar a logística empresarial por meio de </span>
-                    <span>
+                    </h1>
+                    <h1> aprimorar a logística empresarial por meio de </h1>
+                    <h1>
                       tecnologias integradas. Com soluções personalizadas,{" "}
-                    </span>
-                    <span>
+                    </h1>
+                    <h1>
                       que combinam software avançado, análise de dados{" "}
-                    </span>
-                    <span>
+                    </h1>
+                    <h1>
                       {" "}
                       e automação de processos, ajudamos os clientes a{" "}
-                    </span>
-                    <span>
+                    </h1>
+                    <h1>
                       otimizar suas operações, reduzir custos e melhorar a{" "}
-                    </span>
-                    <span>eficiência.</span>
+                    </h1>
+                    <h1>eficiência.</h1>
                   </div>
                 </div>
               }
@@ -196,7 +196,7 @@ function Institucional() {
               style={{
                 width: "50%",
                 position: "absolute",
-                transform: "translate(70%, 283%)",
+                transform: "translate(70%, 300%)",
                 zIndex: 1,
               }}
             >
@@ -210,7 +210,7 @@ function Institucional() {
               style={{
                 width: "49%",
                 position: "absolute",
-                transform: "translate(71%, 640%)",
+                transform: "translate(71%, 575%)",
                 zIndex: 1,
               }}
             >

@@ -10,7 +10,6 @@ const Login = () => {
   const [senha, setSenha] = useState("");
   const handleInputChange = (event, setState) => {
     setState(event.target.value);
-    console.log(event.target.value);
   };
 
   async function log() {
@@ -21,8 +20,8 @@ const Login = () => {
 
     axios
       .post(`http://localhost:8080/funcionario/login`, credentials)
-      .then((response) => {
-        const{data} = response;
+      .then(async (response) => {
+        const{data} = await response;
 
         sessionStorage.setItem("tk", data.token)
       })

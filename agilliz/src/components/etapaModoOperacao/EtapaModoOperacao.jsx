@@ -1,5 +1,6 @@
 import React from "react";
 import DOMPurify from "dompurify";
+import "../../utils/global.css";
 
 const Etapa = ({ texto, etapa, svgNUmeroEtapa}) => {
   const textoLimpo = DOMPurify.sanitize(texto);
