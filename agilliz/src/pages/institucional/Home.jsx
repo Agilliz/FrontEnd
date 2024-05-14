@@ -196,7 +196,7 @@ function Institucional() {
               style={{
                 width: "50%",
                 position: "absolute",
-                transform: "translate(70%, 300%)",
+                transform: "translate(70%, 330%)",
                 zIndex: 1,
               }}
             >
@@ -210,7 +210,7 @@ function Institucional() {
               style={{
                 width: "49%",
                 position: "absolute",
-                transform: "translate(71%, 575%)",
+                transform: "translate(69.5%, 590%)",
                 zIndex: 1,
               }}
             >
