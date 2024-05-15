@@ -1,7 +1,7 @@
 import React from "react";
 import DOMPurify from 'dompurify';
 
-const ContainerBeneficios = ({ texto, svg, titulo }) => {
+const ContainerBeneficios = ({ texto, svg, titulo, id }) => {
     const textoLimpo = DOMPurify.sanitize(texto);
   return (
  
@@ -14,6 +14,7 @@ const ContainerBeneficios = ({ texto, svg, titulo }) => {
           width: "35%",
             height: "auto",
         }}
+        id={id}
       >
         <div
           style={{

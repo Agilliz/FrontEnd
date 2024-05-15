@@ -95,8 +95,8 @@ function Institucional() {
               }
             />
           </div>
-          <Fade>
-          <div className="w-full flex items-center justify-center">
+        
+          <div className="w-full flex items-center justify-center" id="idContainerSobreNos">
             <Container
             altura={"4vh"}
             corFundo={"#F4F6F9"}
@@ -190,11 +190,12 @@ function Institucional() {
             />
             
           </div>
-          </Fade>
+         
               <Container altura={"1vh"} corFundo={"#F4F6F9"} />
           <div
             className="w-full flex items-center justify-center"
             style={{ position: "relative" }}
+            id="idModoOperacoes"
           >
             <div
               style={{
@@ -224,7 +225,9 @@ function Institucional() {
               ></img>
             </div>
 
-            <Container
+            
+            <div className="w-full flex items-center justify-center">
+            <Container 
               tituloSessao={
                 <div
                   style={{
@@ -232,6 +235,8 @@ function Institucional() {
                     justifyContent: "left",
                     alignItems: "center",
                   }}
+                  
+                 
                 >
                   <div
                     style={{
@@ -366,6 +371,7 @@ function Institucional() {
                 </div>
               }
             />
+            </div>
 
               <Fade>
             <Container
@@ -373,7 +379,7 @@ function Institucional() {
               corFundo={"#F4F6F9"}
               largura={100}
               ladoEsquerdo={
-                <>
+              
                   <div
                     style={{
                       display: "flex",
@@ -382,6 +388,7 @@ function Institucional() {
                       alignItems: "flex-end",
                       flexDirection: "column",
                     }}
+                    
                   >
                     <div
                       style={{
@@ -390,6 +397,7 @@ function Institucional() {
                         alignItems: "center",
                         width: "100%",
                       }}
+                      
                     >
                       <div
                         style={{
@@ -413,10 +421,11 @@ function Institucional() {
                                 borderBottom: "4px solid #DE6600",
                                 borderRadius: "3px",
                               }}
+                            
                             >
                               <b>Benefícios</b>
                             </span>
-                            <span> e vantagens </span>
+                            <span id="idContainerBeneficios"> e vantagens </span>
                           </h1>
                         </div>
                         <img
@@ -427,6 +436,7 @@ function Institucional() {
                             maxHeight: "15%",
                             zIndex: "1",
                           }}
+                          
                         ></img>
                       </div>
                     </div>
@@ -437,6 +447,7 @@ function Institucional() {
                         height: "85%",
                         alignItems: "flex-start",
                       }}
+                      
                     >
                       <ContainerBeneficios
                         texto={`<span>Com a nossa solução, oferecemos </span>
@@ -450,6 +461,7 @@ function Institucional() {
                <span>informações precisas e atualizadas.</span>`}
                         titulo={"Coletas"}
                         svg={caminhaoBeneficios}
+                        
                       />
 
                       <ContainerBeneficios
@@ -481,10 +493,11 @@ function Institucional() {
                       `}
                         titulo={"Entregas"}
                         svg={localBeneficios}
+                        
                       />
                     </div>
                   </div>
-                </>
+               
               }
             />
             </Fade>
@@ -512,6 +525,7 @@ function Institucional() {
                       fontWeight: "500",
                       marginTop: "10%",
                     }}
+                    
                   >
                     Contratar Serviço
                   </button>
@@ -540,6 +554,7 @@ function Institucional() {
                         borderRadius: "3px",
                         fontWeight: "700"
                       }}
+                      id="idContatos"
                     >
                       Envie -
                     </span>{" "}
@@ -578,6 +593,7 @@ function Institucional() {
                           fontWeight: "600",
                           fontSize: "1.3rem",
                         }}
+                        
                       >
                         Tire suas dúvidas!
                       </h1>
@@ -638,6 +654,8 @@ function Institucional() {
                           fontWeight: "500",
                           marginTop: "2%",
                         }}
+                        
+                        
                       >
                         Enviar
                       </button>
