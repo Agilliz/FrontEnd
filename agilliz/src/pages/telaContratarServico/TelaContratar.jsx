@@ -34,7 +34,7 @@ function App(){
     <div className={styles.SessaoInput}>
       <Input label={"Endereço"} tamanho={35} placeholder={"Rua/Bairro"}/>
       <Input label={"Número"} tamanho={20} placeholder={"xxx"}/>
-      <Input label={"CEP"} tamanho={20} placeholder={"xxx.xxx.xxx-xx"}/>
+      <Input label={"CEP"} tamanho={20} placeholder={"xxxxx-xxx"}/>
       <div style={{width: "25%"}}></div>
     </div>
     <div className={styles.sessaoBotao}>
