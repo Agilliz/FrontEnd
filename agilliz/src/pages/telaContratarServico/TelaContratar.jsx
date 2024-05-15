@@ -23,18 +23,18 @@ function App(){
       <h1>FORMULÁRIO</h1>
     </div>
     <div className={styles.SessaoInput}>
-      <Input label="Nome Empresa" tamanho={50}/>
-      <Input label={"Nome Fantasia"} tamanho={50} />
+      <Input label="Nome Empresa" tamanho={50} placeholder={"Nome"}/>
+      <Input label={"Nome Fantasia"} tamanho={50} placeholder={"Nome"}/>
     </div>
     <div className={styles.SessaoInput}>
-      <Input label={"CNPJ"} tamanho={30}/>
-      <Input label={"Telefone"} tamanho={30}/>
-      <Input label={"E-mail"} tamanho={35} />
+      <Input label={"CNPJ"} tamanho={30} placeholder={"xx.xxx.xxx/xxxx-xx"}/>
+      <Input label={"Telefone"} tamanho={30} placeholder={"(xx) xxxxx-xxxx"}/>
+      <Input label={"E-mail"} tamanho={35} placeholder={"xxxx@xxx.xxx"}/>
     </div>
     <div className={styles.SessaoInput}>
-      <Input label={"Endereço"} tamanho={35}/>
-      <Input label={"Número"} tamanho={20}/>
-      <Input label={"CEP"} tamanho={20} />
+      <Input label={"Endereço"} tamanho={35} placeholder={"Rua/Bairro"}/>
+      <Input label={"Número"} tamanho={20} placeholder={"xxx"}/>
+      <Input label={"CEP"} tamanho={20} placeholder={"xxx.xxx.xxx-xx"}/>
       <div style={{width: "25%"}}></div>
     </div>
     <div className={styles.sessaoBotao}>

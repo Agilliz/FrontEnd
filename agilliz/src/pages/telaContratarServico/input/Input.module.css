@@ -76,3 +76,14 @@
   .wave-group .input:focus ~ .bar:after {
     width: 50%;
   }
+
+  /* CSS para a placeholder */
+.input::placeholder {
+  color: transparent; /* A placeholder é inicialmente transparente */
+  transition: color 0.5s; /* Tempo de transição de 0.3 segundos */
+}
+
+.input:focus::placeholder,
+.input:not(:placeholder-shown)::placeholder {
+  color: #999; /* Quando o efeito de "wave" acontecer, a placeholder ganha cor */
+}
