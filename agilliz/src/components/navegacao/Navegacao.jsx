@@ -34,10 +34,10 @@ const Navegacao = () => {
           alignItems: "center",
         }}
       >
-        <li onClick={handleClick("idContainerSobreNos")}>Sobre nós</li>
-        <li onClick={handleClick("idModoOperacoes")}>Modo de Operação</li>
-        <li onClick={handleClick("idContainerBeneficios")}>Benefícios e vantagens</li>
-        <li onClick={handleClick("idContatos")}>Contato</li>
+        <li className={styles.anotacao} onClick={handleClick("idContainerSobreNos")}>Sobre nós</li>
+        <li className={styles.anotacao} onClick={handleClick("idModoOperacoes")}>Modo de Operação</li>
+        <li className={styles.anotacao} onClick={handleClick("idContainerBeneficios")}>Benefícios e vantagens</li>
+        <li className={styles.anotacao} onClick={handleClick("idContatos")}>Contato</li>
         <button onClick={() => navigate("/login")} className={styles.button}>
           <div className={styles["motoqueiro"]}></div>
           <h1>Entrar</h1>

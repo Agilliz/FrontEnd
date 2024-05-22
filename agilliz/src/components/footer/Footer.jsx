@@ -1,8 +1,7 @@
 import React from 'react';
 import logoNomeFooter from "../../images/logoComNomeFooter.svg";
 import logoCoelhinhoDireita from "../../images/logoCoelhoDireita.svg";
-import logoCoelhinho from "../../images/logo-coelinho.png";
-
+import styles from "../footer/Footer.module.css"
 
 
 const Footer = () => {
@@ -42,11 +41,11 @@ const Footer = () => {
                   justifyContent: "center",
                 }}
               >
-                <h1 style={{fontWeight: "700"}}>Explore</h1>
-                <h3 style={{fontWeight: "500"}}>Sobre Nós</h3>
-                <h3 style={{fontWeight: "500"}}>Modo de Operação</h3>
-                <h3 style={{fontWeight: "500"}}>Benefícios e vantagens</h3>
-                <h3 style={{fontWeight: "500"}}>contate-nos</h3>
+                <h1 className={styles.scale} style={{fontWeight: "700"}}>Explore</h1>
+                <h3 className={styles.scale} style={{fontWeight: "500"}}>Sobre Nós</h3>
+                <h3 className={styles.scale} style={{fontWeight: "500"}}>Modo de Operação</h3>
+                <h3 className={styles.scale} style={{fontWeight: "500"}}>Benefícios e vantagens</h3>
+                <h3 className={styles.scale} style={{fontWeight: "500"}}>Contate-nos</h3>
               </div>
             </div>
             <div className="containerFooter">

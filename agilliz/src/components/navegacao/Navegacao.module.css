@@ -53,12 +53,13 @@
   }
 }
 
-li {
+.anotacao {
   position: relative;
   cursor: pointer;
+  transition: 500ms ease-in-out;
 }
 
-li:hover::after {
+.anotacao:hover::after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -66,6 +67,11 @@ li:hover::after {
   height: 2px;
   background-color: #DE6600;
   animation: animacaoUnderline 0.2s ease forwards;
+}
+
+.anotacao:hover{
+  transform: scale(1.02);
+  transition: 500ms;
 }
 
 @keyframes animacaoUnderline {
