@@ -5,16 +5,16 @@ import api from "../../api";
 const Tabela = () => {
     const [listaFuncionarios, setListaFuncionarios] = useState([]);
 
+    const config = {
+        headers: {
+          'Authorization': `Bearer ${sessionStorage.getItem('tk')}`
+        }
+      };
+
      useEffect(() => {
-        api.get('funcionario/', {
-            auth: {
-                username: 'agilizDev',
-                password: '850d6c98-8e09-4325-b419-8ca5c7f97dd5'
-            }
-        })
+        api.get('http://localhost:8080/funcionario/', config)
         .then((res) => {
             setListaFuncionarios(res.data.data.content);
-            console.log(listaFuncionarios);
         })
         .catch((error) => {
             console.log(error);
