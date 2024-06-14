@@ -1,22 +1,22 @@
 import React from "react";
-import Navbar from "./components/Navbar/Navbar";
-import TopNavbar from "./components/TopNavbar/TopNavbar";
-
-
+import Rotas from "./routes";
+import Navbar from './components/Navbar/Navbar';
+import Header from './components/Header';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (
-    <div className="App">
-      <div className="h-screen flex" name="tela-inteira">
-        <Navbar></Navbar>
-        <div className="h-full w-full">
-          <div name="topbar" className="h-24 pl-8 flex items-center">
-            <TopNavbar children={"jnx"} id={123}></TopNavbar>
-            <div name="topbar-nav" className="h-2/5"></div>
-          </div>
-        </div>
+    <>
+    <div className='flex h-screen'>
+      <Navbar />
+      <div className='w-full'>
+        <Header />
+        <Rotas />
       </div>
     </div>
+    <ToastContainer />
+    </>
   );
 }
 
