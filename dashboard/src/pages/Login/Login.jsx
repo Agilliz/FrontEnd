@@ -2,7 +2,6 @@ import React from "react";
 import styles from "./Login.module.css";
 import { useState } from "react";
 import fotoForm from "../../images/logo-coelinho.png";
-import axios from "axios";
 import api from "../../api";
 import { useNavigate } from 'react-router-dom';
 
