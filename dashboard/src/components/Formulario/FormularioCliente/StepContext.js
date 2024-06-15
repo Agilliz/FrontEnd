@@ -1,10 +1,11 @@
+// StepContext.js (para Cliente)
 import React, { useState } from 'react';
 import api from '../../../api';
 import FormularioCliente from './FormularioCliente';
 import { toast } from 'react-toastify';
 export const multiStepContext = React.createContext();
 
- const StepContext = ({conteudo, setModal}) => {
+ const StepContextCliente = ({conteudo, setModal}) => {
     const [currentStep, setStep] = useState(1);
     const [userData, setUserData] = useState(conteudo);
     const [finalData, setFinalData] = useState([]);  
@@ -84,4 +85,4 @@ export const multiStepContext = React.createContext();
       </div>
     )
 }
-export default StepContext;
+export default StepContextCliente;

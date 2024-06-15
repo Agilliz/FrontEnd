@@ -5,7 +5,7 @@ import Modal from '../components/Modal';
 import FormularioCliente from '../components/Formulario/FormularioCliente/FormularioCliente';
 import Pesquisa from '../components/Pesquisa';
 
-function GestaoColaboradores() {
+function GestaoClientes() {
 
     const [openModal, setModal] = useState(false);
     return (
@@ -23,9 +23,9 @@ function GestaoColaboradores() {
     <Button onClick={() => setModal(true)} label=" + Cadastrar cliente"/>
     </div>
 
-    <Modal isOpen={openModal} setModal={setModal} setModalOpen={() => setModal(!openModal)} conteudo={<FormularioCliente />}/>
+    <Modal isOpen={openModal} setModal={setModal} setModalOpen={() => setModal(!openModal)} conteudo={<FormularioCliente />} tipo="cliente" />
     </>
   )
 }
 
-export default GestaoColaboradores
+export default GestaoClientes
