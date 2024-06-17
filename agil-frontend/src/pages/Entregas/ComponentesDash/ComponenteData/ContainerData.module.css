@@ -1,0 +1,40 @@
+::selection{
+  background-color: #DE6600;
+  color: white;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 3%;
+  width: 48%;
+  height: 13.3vh;
+  max-height: auto;
+  border-radius: 10px;
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.389);
+  border: 3px solid rgba(128, 128, 128, 0.158);
+  position: relative;
+}
+
+.container:hover {
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.589);
+  border: 3px solid rgba(128, 128, 128, 0.358);
+}
+
+.titulo {
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #2c2d5b;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.valor {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #2c2d5b;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
