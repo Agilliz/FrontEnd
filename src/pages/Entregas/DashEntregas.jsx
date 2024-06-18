@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import Titulo from "../../components/Titulo";
 import PeriodoCalendario from "../../components/PeriodoCalendario";
 import Modal from "../../components/Modal";

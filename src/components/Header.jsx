@@ -6,7 +6,7 @@ import { useLocation } from "react-router-dom"
 
 const Header = () => {
 
-  const location = useLocation();
+  // const location = useLocation();
 
   return (
 

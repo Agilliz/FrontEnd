@@ -1,8 +1,8 @@
-import React, { useState, useContext } from 'react'
+import React, { useContext } from 'react'
 import Input from '../Input'
-import api from '../../../api'
-import SelectBox from '../SelectBox'
-import Button from '../../Button'
+// import api from '../../../api'
+// import SelectBox from '../SelectBox'
+// import Button from '../../Button'
 import { multiStepContext } from './StepContext'
 
 import { FaChevronRight } from "react-icons/fa";

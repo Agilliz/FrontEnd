@@ -4,9 +4,9 @@ import Endereco from './Endereco'
 import Valores from './Valores'
 import { multiStepContext } from './StepContext';
 
-import { FaChevronRight } from "react-icons/fa";
-import { FaChevronLeft } from "react-icons/fa";
-import { IconContext } from 'react-icons/lib';
+// import { FaChevronRight } from "react-icons/fa";
+// import { FaChevronLeft } from "react-icons/fa";
+// import { IconContext } from 'react-icons/lib';
 
 function FormularioCliente({ initialData }) {
 

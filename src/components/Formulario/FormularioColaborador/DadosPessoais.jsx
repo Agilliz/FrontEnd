@@ -1,12 +1,11 @@
-import React, { useState, useContext } from 'react'
+import React, {  useContext } from 'react'
 import Input from '../Input'
-import SelectBox from '../SelectBox'
 import { multiStepContext } from './StepContext'
 import Button from '../../Button'
 
-import { FaChevronRight } from "react-icons/fa";
-import { FaChevronLeft } from "react-icons/fa";
-import { IconContext } from 'react-icons/lib';
+// import { FaChevronRight } from "react-icons/fa";
+// import { FaChevronLeft } from "react-icons/fa";
+// import { IconContext } from 'react-icons/lib';
 
 const DadosPessoais = () => {
   const { setStep, userData, setUserData, submitData } = useContext(multiStepContext);
