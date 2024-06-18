@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import axios from "axios";
 import Titulo from "../../components/Titulo";
 import PeriodoCalendario from "../../components/PeriodoCalendario";
 import Modal from "../../components/Modal";
@@ -9,7 +10,11 @@ import ContainerDataComButton from "./ComponentesDash/ContainerDataComBtn/Contai
 import GraficoLinha from "../../components/Graficos/GraficoLinha";
 import GraficoBar from "../../components/Graficos/GraficoBar";
 
+
+
 function Home() {
+
+
   return (
     <>
       <div className="pl-4 pt-4 w-full">
@@ -23,7 +28,17 @@ function Home() {
             <ContainerDash
               titulo="Excelência em Coletas"
               idChart="chart-bar"
-              grafico={<GraficoBar altura={130} data={[40, 20, 20]} categories={["Coletas Realizadas", "Coletas Canceladas", "Coletas em Espera"]}/>}
+              grafico={
+                <GraficoBar
+                  altura={130}
+                  data={[1,2, 4]}
+                  categories={[
+                    "Coletas Realizadas",
+                    "Coletas Canceladas",
+                    "Coletas em Espera",
+                  ]}
+                />
+              }
             />
 
             <div className="flex justify-between items-center w-full">
@@ -34,7 +49,12 @@ function Home() {
             <ContainerDash
               titulo="Quantidade de coletas"
               idChart="chart-linha"
-              grafico={<GraficoLinha altura={140} data={[43, 54, 65, 76, 76, 43, 65]}/>}
+              grafico={
+                <GraficoLinha
+                  altura={140}
+                  data={[43, 54, 65, 76, 76, 43, 65]}
+                />
+              }
             />
           </div>
 
@@ -42,7 +62,7 @@ function Home() {
             <div className="flex justify-center items-center w-full pt-0">
               <div className="flex justify-center items-center w-full flex-col">
                 <div className="flex justify-between items-center w-full">
-                  <ContainerData titulo={"Coletas Realizas"} valor={"35/40"} />
+                  <ContainerData titulo={"Coletas Realizas"} valor={"987"} />
                   <ContainerData titulo={"Coletas Canceladas"} valor={"2"} />
                 </div>
                 <div className="flex justify-between items-center w-full">

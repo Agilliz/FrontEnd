@@ -16,12 +16,16 @@ export const menuItemsData = [
       icon: <PiChartBar />,
       submenu: [
         {
-          title: 'Mensal',
-          urlNavigate: "/mensal"
+          title: 'Dashboard Coletas',
+          urlNavigate: "/dashboard-coletas"
         },
         {
-          title: 'Diário',
-          urlNavigate: "/diario"
+             title: 'Dashboard Entregas',
+          urlNavigate: "/dashboard-entregas"
+        },
+        {
+          title: 'Dashboard Financeira',
+          urlNavigate: "/"
         }
       ],
       
@@ -55,8 +59,7 @@ export const menuItemsData = [
       icon: <TbTruckDelivery />,
       submenu: [
         {
-          title: 'Dashboard Coletas',
-          urlNavigate: "/dashboard-coletas"
+         
         },
         {
           title: 'Gestão Coletas',
@@ -69,8 +72,7 @@ export const menuItemsData = [
       icon: <RiMotorbikeLine />,
       submenu: [
         {
-          title: 'Dashboard Entregas',
-          urlNavigate: "/dashboard-entregas"
+      
         },
         {
           title: 'Gestão Entregas',
