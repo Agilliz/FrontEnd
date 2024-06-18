@@ -15,7 +15,8 @@ const StepContextColaborador = ({ conteudo, setModal }) => {
     dataAdmissao: '',
     classeCarteira: '',
     emailColaborador: '',
-    senhaColaborador: ''
+    senhaColaborador: '',
+    telefoneColaborador: ''
   });
   const [finalData, setFinalData] = useState([]);
 
@@ -25,76 +26,52 @@ const StepContextColaborador = ({ conteudo, setModal }) => {
     }
   };
 
-  function submitData() {
-    setFinalData(finalData => [...finalData, userData]);
+  const submitData = () => {
+    if (conteudo) {
+      atualizarColaborador();
+    } else {
+      cadastrarColaborador();
+    }
+    setModal(false); // Move setModal aqui para evitar chamadas duplicadas
 
-    if (!conteudo) cadastrarColaborador();
-    else atualizarColaborador();
-
-    setModal(false);
-  }
-
-  function atualizarColaborador() {
-    api.put(`unidade/alterar/${userData.idUnidade}`, {
-      rua: userData.rua,
-      cep: userData.cep,
-      numero: userData.numero,
-      digitosVerificadores: userData.digitosVerificadores,
-      telefoneUnidade: userData.telefoneUnidade
-    }, {
-      auth: {
-        username: 'agilizDev',
-        password: '850d6c98-8e09-4325-b419-8ca5c7f97dd5'
-      }
-    })
-    .then((res) => {
-      toast.success('Usuário atualizado');
-      console.log(res);
-    })
-    .catch((error) => {
-      toast.error('Falha ao atualizar');
-      console.log(error);
+    // Limpar dados após cadastro ou atualização
+    setUserData({
+      nomeColaborador: '',
+      rg: '',
+      cpf: '',
+      dataNascimento: '',
+      dataAdmissao: '',
+      classeCarteira: '',
+      emailColaborador: '',
+      senhaColaborador: '',
+      telefoneColaborador: ''
     });
-  }
+    setStep(1);
+  };
 
-  function cadastrarColaborador() {
-    console.log(JSON.stringify(userData) + " aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-
-    api.post('funcionario/cadastrar', {
-      nomeColaborador: userData.nomeColaborador,
-      cpf: userData.cpf,
-      rg: userData.rg,
-      classeCarteira: userData.classeCarteira,
-      dataNascimento: userData.dataNascimento,
-      emailColaborador: userData.emailColaborador,
-      senhaColaborador: userData.senhaColaborador,
-      dataAdmissao: userData.dataAdmissao,
-      telefoneColaborador: userData.telefoneColaborador
-    }, config)
-    .then((res) => {
-      toast.success('Usuário cadastrado!');
-      console.log(res);
-    })
-    .catch((error) => {
-      toast.error('Não foi possível realizar o cadastro');
-      console.log(error);
-    })
-    .finally(() => {
-      setUserData({
-        nomeColaborador: '',
-        rg: '',
-        cpf: '',
-        dataNascimento: '',
-        dataAdmissao: '',
-        classeCarteira: '',
-        emailColaborador: '',
-        senhaColaborador: ''
+  const atualizarColaborador = () => {
+    api.put(`http://localhost:8080/funcionario/alterar/${userData.idColaborador}`, userData, config)
+      .then((res) => {
+        toast.success('Usuário atualizado');
+        console.log(res);
+      })
+      .catch((error) => {
+        toast.error('Falha ao atualizar');
+        console.error('erro : ' + error);
       });
-      setStep(1);
-    });
+  };
 
-    setModal(false);
-  }
+  const cadastrarColaborador = () => {
+    api.post('http://localhost:8080/funcionario/cadastrar', userData, config)
+      .then((res) => {
+        toast.success('Usuário cadastrado!');
+        console.log(res);
+      })
+      .catch((error) => {
+        toast.error('Não foi possível realizar o cadastro');
+        console.error(error);
+      });
+  };
 
   return (
     <multiStepContext.Provider value={{ currentStep, setStep, userData, setUserData, finalData, setFinalData, submitData }}>

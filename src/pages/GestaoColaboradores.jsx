@@ -9,8 +9,8 @@ const GestaoColaboradores = () => {
 
   return (
     <>
-      <div className='flex pt-8'>
-        <strong className='w-1/2 pl-8 text-agilzorange'>Mural de Colaboradores</strong>
+      <div className='flex'>
+        <strong className='w-1/2 p-8 text-agilzorange'>Mural de Colaboradores</strong>
         <div className='w-1/2 flex justify-end pr-8'></div>
       </div>
       <TabelaColaborador />

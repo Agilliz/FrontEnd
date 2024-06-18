@@ -19,8 +19,6 @@ export const multiStepContext = React.createContext();
       setModal(false);
 
       window.location.reload();
-
-      
     }
 
     function atualizarCliente(){
