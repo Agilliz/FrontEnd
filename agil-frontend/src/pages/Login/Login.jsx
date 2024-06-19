@@ -4,33 +4,39 @@ import { useState } from "react";
 import fotoForm from "../../images/logo-coelinho.png";
 import api from "../../api";
 import { useNavigate } from 'react-router-dom';
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [login, setLogin] = useState("");
   const [senha, setSenha] = useState("");
+  const [usuarioLogado, setUsuarioLogado] = useState(true);
   const handleInputChange = (event, setState) => {
     setState(event.target.value);
     console.log(event.target.value);
   };
 
   async function log() {
-    console.log('teste');
     let credentials = {
       email: login,
       senha: senha,
     };
-
-    api.post(`http://localhost:8080/funcionario/login`, credentials).then((response) => {
-      console.log(credentials,  ' credentials');
-        const{data} = response;
-        console.log('token ' + data.token);
-        sessionStorage.setItem("tk", data.token)
+  
+    try {
+      const response = await api.post(`http://localhost:8080/funcionario/login`, credentials);
+      const { data } = response;
+  
+      if (data.token) {
+        sessionStorage.setItem("tk", data.token);
         window.location.reload();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      } else {
+        setUsuarioLogado(false);
+      }
+    } catch (error) {
+      toast.error('Erro ao fazer login:', error);
+      setUsuarioLogado(false);
+    }
   }
+  
 
   const navigate = useNavigate();
   
@@ -108,6 +114,11 @@ const Login = () => {
               </span>
             </label>
           </div>
+          {
+  !usuarioLogado ?
+    <div><strong className="text-red-600">Usuário e/ou senha incorretas</strong></div>
+    : null
+}
 
           <button
             className={styles["btnLogin"]}

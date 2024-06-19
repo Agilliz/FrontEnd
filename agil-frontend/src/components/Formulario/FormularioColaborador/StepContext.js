@@ -35,18 +35,17 @@ const StepContextColaborador = ({ conteudo, setModal }) => {
   }
 
   function atualizarColaborador() {
-    api.put(`unidade/alterar/${userData.idUnidade}`, {
-      rua: userData.rua,
-      cep: userData.cep,
-      numero: userData.numero,
-      digitosVerificadores: userData.digitosVerificadores,
-      telefoneUnidade: userData.telefoneUnidade
-    }, {
-      auth: {
-        username: 'agilizDev',
-        password: '850d6c98-8e09-4325-b419-8ca5c7f97dd5'
-      }
-    })
+    api.put('http://localhost:8080/funcionario/alterar/', {
+      nomeColaborador: userData.nomeColaborador,
+      cpf: userData.cpf,
+      rg: userData.rg,
+      classeCarteira: userData.classeCarteira,
+      dataNascimento: userData.dataNascimento,
+      emailColaborador: userData.emailColaborador,
+      senhaColaborador: userData.senhaColaborador,
+      dataAdmissao: userData.dataAdmissao,
+      telefoneColaborador: userData.telefoneColaborador
+    }, config)
     .then((res) => {
       toast.success('Usuário atualizado');
       console.log(res);
@@ -60,7 +59,9 @@ const StepContextColaborador = ({ conteudo, setModal }) => {
   function cadastrarColaborador() {
     console.log(JSON.stringify(userData) + " aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 
-    api.post('funcionario/cadastrar', {
+
+    
+    api.post('http://localhost:8080/funcionario/cadastrar', {
       nomeColaborador: userData.nomeColaborador,
       cpf: userData.cpf,
       rg: userData.rg,
@@ -73,6 +74,7 @@ const StepContextColaborador = ({ conteudo, setModal }) => {
     }, config)
     .then((res) => {
       toast.success('Usuário cadastrado!');
+      setTimeout(window.location.reload(), 5000);
       console.log(res);
     })
     .catch((error) => {
