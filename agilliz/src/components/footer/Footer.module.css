@@ -1,9 +1,0 @@
-.scale{
-    transition: 500ms ease-in-out;
-    cursor: pointer;
-}
-
-.scale:hover{
-    transform: scale(1.03);
-    transition: 500ms;
-}
