@@ -16,15 +16,15 @@ export const menuItemsData = [
       icon: <PiChartBar />,
       submenu: [
         {
-          title: 'Dashboard Coletas',
+          title: 'Coletas',
           urlNavigate: "/dashboard-coletas"
         },
         {
-             title: 'Dashboard Entregas',
+             title: 'Entregas',
           urlNavigate: "/dashboard-entregas"
         },
         {
-          title: 'Dashboard Financeira',
+          title: 'Financeira',
           urlNavigate: "/"
         }
       ],

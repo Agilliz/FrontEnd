@@ -35,11 +35,11 @@ const MenuItems = ({ items, depthLevel }) => {
         openMenuIndex === depthLevel
           ? "item-transition"
           : "item-transition-reverse"
-      }`}
+      }`} style={{color: "#2C2D5B"}}
       ref={ref}
     >
       <button
-        className="menu-item-button flex w-full h-full bg"
+        className="menu-item-button flex w-full h-full"
         onClick={() => handleMenuClick(depthLevel)}
       >
         {items.submenu ? (
@@ -47,7 +47,7 @@ const MenuItems = ({ items, depthLevel }) => {
             <div className="w-3/12 flex items-center justify-center h-full">
               {items.icon}
             </div>
-            <h2 className="w-6/12 flex justify-start items-center h-full font-semibold">
+            <h2 className="w-6/12 flex justify-start items-center h-full font-semibold p-3 pt-2" style={{color: "white"}}>
               {items.title}
             </h2>
             <span
