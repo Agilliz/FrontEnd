@@ -1,28 +1,54 @@
-import React, { useContext } from 'react';
-import Input from '../Input';
-import Button from '../../Button';
+import React, { useContext, useState } from 'react';
+import DadosEmpresariais from './DadosEmpresariais'
+import Endereco from './Endereco'
+import Valores from './Valores'
 import { multiStepContext } from './StepContext';
+
 import { FaChevronRight } from "react-icons/fa";
 import { FaChevronLeft } from "react-icons/fa";
 import { IconContext } from 'react-icons/lib';
 
-function FormularioCliente() {
-  const { setStep, userData, setUserData, submitData } = useContext(multiStepContext);
+function FormularioCliente({ initialData }) {
 
-  return (
-    <form className='pt-8'>
-      <strong className='text-agilzorange'>Dados pessoais</strong>
-      <div className="grid md:grid-cols-2 md:gap-6 pt-4">
-        <Input label="Telefone" value={userData.telefoneUnidade} onChange={(e) => setUserData({...userData, telefoneUnidade: e.target.value})} />
-        <Input label="CEP" value={userData.cep} onChange={(e) => setUserData({...userData, cep: e.target.value})} />
-        <Input label="Rua" value={userData.rua} onChange={(e) => setUserData({...userData, rua: e.target.value})} />
-        <Input label="Número" value={userData.numero} onChange={(e) => setUserData({...userData, numero: e.target.value})} />
-      </div>
-      <div className='flex justify-center items-center w-full'>
-        <Button label="Salvar" color="bg-agilzorange" onClick={submitData} />
-      </div>
-    </form>
-  );
-}
+    const { currentStep, finalData } = useContext(multiStepContext);
 
-export default FormularioCliente;
+    const [formData, setFormData] = useState({
+
+        rua: initialData ? initialData.rua : '',
+        cep: initialData ? initialData.cep : '',
+        numero: initialData ? initialData.numero : '',
+        digitosVerificadores: initialData ? initialData.digitosVerificadores : '',
+        telefoneUnidade: initialData ? initialData.telefoneUnidade : '',
+        
+    });
+
+
+
+    function showStep (step) {
+        switch(step) {
+            case 1: 
+            return <DadosEmpresariais />
+            case 2: 
+            return <Endereco /> 
+            case 3: 
+            return <Valores />
+            default:
+            break;
+        }
+    }
+
+    return (
+        <div className='p-4'>
+        {showStep(currentStep)}
+        </div>
+    )
+
+
+
+};
+
+
+
+
+
+export default FormularioCliente

@@ -1,128 +1,88 @@
-import React, { useState, createContext, useEffect } from 'react';
+// StepContext.js (para Cliente)
+import React, { useState } from 'react';
 import api from '../../../api';
-import { toast } from 'react-toastify';
 import FormularioCliente from './FormularioCliente';
+import { toast } from 'react-toastify';
+export const multiStepContext = React.createContext();
 
-export const multiStepContext = createContext();
+ const StepContextCliente = ({conteudo, setModal}) => {
+    const [currentStep, setStep] = useState(1);
+    const [userData, setUserData] = useState(conteudo);
+    const [finalData, setFinalData] = useState([]);  
 
-const StepContextCliente = ({ conteudo, setModal }) => {
-  const [currentStep, setStep] = useState(1);
-  const [userData, setUserData] = useState({
-    rua: '',
-    cep: '',
-    numero: '',
-    telefoneUnidade: ''
-  });
-  const [finalData, setFinalData] = useState([]);
-  const [listaClientes, setListaClientes] = useState([]);
+    function submitData() {
+      setFinalData(finalData=>[...finalData, userData]);
 
-  useEffect(() => {
-    if (conteudo) {
-      setUserData(conteudo);
+      if(!conteudo) cadastrarCliente();
+      else atualizarCliente();
+
+      setModal(false);
+
+      window.location.reload();
+
+      
     }
-    carregarClientes(); 
-  }, [conteudo]);
 
-  const config = {
-    headers: {
-      'Authorization': `Bearer ${sessionStorage.getItem('tk')}`
+    function atualizarCliente(){
+      api.put(`unidade/alterar/${userData.idUnidade}`,{
+            rua: userData.rua,
+            cep: userData.cep,
+            numero: userData.numero,
+            digitosVerificadores: userData.digitosVerificadores,
+            telefoneUnidade: userData.telefoneUnidade
+        },
+        {
+        auth: {
+            username: 'agilizDev',
+            password: '850d6c98-8e09-4325-b419-8ca5c7f97dd5'
+        }
+        })
+        .then((res) => {
+            toast.success('Usuário atualizado');
+            console.log(res);
+        })
+        .catch((error) => {
+            toast.error('Falha ao atualizar');
+            console.log(error);
+        })
     }
-  };
- 
-  function submitData() {
-    setFinalData(finalData => [...finalData, userData]);
 
-    if (userData.idUnidade) {
-      atualizarCliente();
-    } else {
-      cadastrarCliente();
-    }
-    setModal(false);
-  };
-
-  const atualizarCliente = () => {
-    api.put(`http://localhost:8080/unidade/alterar/${userData.idUnidade}`, {
-    rua: userData.rua,
-    cep: userData.cep,
-    numero: userData.numero,
-    telefoneUnidade: userData.telefoneUnidade
-    }, config)
-    .then((res) => {
-        toast.success('Cliente atualizado');
-        carregarClientes(); // Atualizar lista de clientes após atualização
-        limparDados();
+    function cadastrarCliente(){
+      api.post('unidade/cadastrar',{
+        rua: userData.rua,
+        cep: userData.cep,
+        numero: userData.numero,
+        digitosVerificadores: userData.digitosVerificadores,
+        telefoneUnidade: userData.telefoneUnidade
+      },
+      {
+        auth: {
+            username: 'agilizDev',
+            password: '850d6c98-8e09-4325-b419-8ca5c7f97dd5'
+        }
       })
-      .catch((error) => {
-        toast.error('Falha ao atualizar cliente');
-        console.log(error);
-      });
-  };
-
-
-  const carregarClientes = () => {
-    api.get('http://localhost:8080/unidade/', config)
       .then((res) => {
-        setListaClientes(res.data.data.content);
+          toast.success('Usuário cadastrado!');
       })
       .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  
-
-  const cadastrarCliente = () => {
-    api.post('http://localhost:8080/unidade/cadastrar', {
-      rua: userData.rua,
-      cep: userData.cep,
-      numero: userData.numero,
-      telefoneUnidade: userData.telefoneUnidade
-      }, config)
-      .catch((error) => {
-        toast.error('Não foi possível cadastrar o cliente');
-        console.log(error);
-      }).finally(() => {
-        setUserData({
-          rua: '',
-          cep: '',
-          numero: '',
-          telefoneUnidade: ''
-        });
+          toast.error('Não foi possível realizar o cadastro');
+      })
+      .finally(() => {
+        setUserData([]);
         setStep(1);
       });
+
       setModal(false);
-  };
 
-  
 
-  const deletarCliente = (idCliente) => {
-    api.delete(`http://localhost:8080/unidade/deletar/${idCliente}`, config)
-      .then((res) => {
-        toast.success('Cliente excluído');
-        carregarClientes(); // Atualizar lista de clientes após exclusão
-      })
-      .catch((error) => {
-        toast.error('Erro ao excluir cliente');
-        console.log(error);
-      });
-  };
+    }
 
-  const limparDados = () => {
-    setUserData({
-      rua: '',
-      cep: '',
-      numero: '',
-      telefoneUnidade: ''
-    });
-    setStep(1);
-  };
-
-  return (
-    <multiStepContext.Provider value={{ currentStep, setStep, userData, setUserData, finalData, setFinalData, submitData, listaClientes, deletarCliente }}>
-      {/* Renderizar o conteúdo filho */}
-      <FormularioCliente />
-    </multiStepContext.Provider>
-  );
-};
-
+    return (
+      <div>
+        <multiStepContext.Provider value={{currentStep, setStep, userData, setUserData, finalData, setFinalData, submitData}} >
+          <FormularioCliente />
+        </multiStepContext.Provider>
+      </div>
+    )
+}
 export default StepContextCliente;
