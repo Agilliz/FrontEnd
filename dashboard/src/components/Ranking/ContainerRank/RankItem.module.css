@@ -1,0 +1,22 @@
+.sessaoValor{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 15vw;
+    margin-top: 2%;
+}
+
+.valor{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    font-weight: 500;
+    border-left: solid 1px black;
+    border-right: solid 1px black;
+    background-color: rgba(3, 3, 3, 0.044);
+}
+
+.valor > :nth-child(2){
+    margin-right: 4%;
+}

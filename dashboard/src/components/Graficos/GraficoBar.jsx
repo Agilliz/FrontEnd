@@ -7,7 +7,7 @@ const GraficoBar = ({ data, altura, categories }) => {
     useEffect(() => {
         const options = {
             series: [{
-                name: 'Faturamento',
+                name: 'Quantidade',
                 data: data
             }],
             chart: {
@@ -34,7 +34,13 @@ const GraficoBar = ({ data, altura, categories }) => {
                         fontFamily: 'Helvetica, Arial, sans-serif',
                         fontWeight: 400,
                     }
-                }
+                },
+                tickAmount: 5,
+                min: 0,
+                max: Math.max(...data) + 4, // Ajuste o máximo dinamicamente
+                axisTicks: {
+                  show: true
+                },
             },
             yaxis: {
                 labels: {

@@ -7,7 +7,7 @@ import ContainerDash from "../Entregas/ComponentesDash/ContainerDash/ContainerDa
 import ContainerData from "./ComponentesDash/ContainerData";
 import Button from "./ComponentesDash/button";
 import ContainerZona from "./ComponentesDash/ContainerMapaZona";
-import GraficoLinha from "../../components/Graficos/GraficoLinha";
+import GraficoLinha from "../../components/Graficos/GraficoLinhaMesMock";
 import GraficoBar from "../../components/Graficos/GraficoBar";
 
 async function procurarDados() {
@@ -30,17 +30,17 @@ async function procurarDados() {
 
 function Home() {
   const [dados, setDados] = useState(null);
-  const [loading, setLoading] = useState(true); // Estado para controlar o carregamento
+  const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const result = await procurarDados();
         setDados(result);
-        setLoading(false); // Marca o carregamento como completo após receber os dados
+        setLoading(false); 
       } catch (error) {
         console.error("Erro ao buscar dados:", error);
-        setLoading(false); // Marca o carregamento como completo mesmo em caso de erro
+        setLoading(false); 
       }
     };
 
@@ -50,7 +50,7 @@ function Home() {
   console.log(dados)
 
   if (loading) {
-    return <p>Carregando dados...</p>; // Exibe uma mensagem enquanto os dados estão sendo carregados
+    return <p>Carregando dados...</p>; 
   }
 
   return (
@@ -89,7 +89,9 @@ function Home() {
             <ContainerDash
               titulo="Custo Operacional"
               idChart="chart-linha"
-              grafico={<GraficoLinha altura={180} data={[dados.custoOperacional]} />}
+              // data={[dados.custoOperacional]}
+              // mockado 
+              grafico={<GraficoLinha altura={180} data={[43, 54, 43, 65, 23, 54]} />}
             />
             <div className="flex justify-center items-center w-full">
               <div className="flex justify-center items-center w-full flex-col">

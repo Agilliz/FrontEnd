@@ -22,14 +22,39 @@
     font-weight: bold;
     color: #2C2D5B;
     margin-top: 10px;
-    margin-bottom: 5px;
+    margin-bottom: 13px;
 }
 
 .valor{
     display: flex;
-    justify-content: center;
+    justify-content: top;
     align-items: center;
     width: 100%;
     height: 100%;
-    
+    flex-direction: column;
+
 }
+
+.valor *{
+    font-size: 0.9rem;
+    color: #2C2D5B;
+}
+
+.cabecalho{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 10%;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-right: 8%;
+    margin-bottom: 5%;
+}
+
+.cabecalho *{
+    color: #2C2D5B;
+    margin-left: 8%;
+}
+
