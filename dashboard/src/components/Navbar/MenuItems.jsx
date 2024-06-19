@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { RiArrowDropDownLine } from "react-icons/ri";
 import Dropdown from "./Dropdown";
 
 const MenuItems = ({ items, depthLevel }) => {
@@ -35,19 +34,27 @@ const MenuItems = ({ items, depthLevel }) => {
         openMenuIndex === depthLevel
           ? "item-transition"
           : "item-transition-reverse"
-      }`} style={{color: "#2C2D5B"}}
+      }`}
       ref={ref}
     >
       <button
         className="menu-item-button flex w-full h-full"
         onClick={() => handleMenuClick(depthLevel)}
+        style={{
+          color: openMenuIndex === depthLevel ? "white" : "#2C2D5B",
+        }}
       >
         {items.submenu ? (
           <>
             <div className="w-3/12 flex items-center justify-center h-full">
               {items.icon}
             </div>
-            <h2 className="w-6/12 flex justify-start items-center h-full font-semibold p-3 pt-2" style={{color: "white"}}>
+            <h2
+              className="w-6/12 flex justify-start items-center h-full font-semibold p-3 pt-2"
+              style={{
+                color: openMenuIndex === depthLevel ? "white" : "#2C2D5B",
+              }}
+            >
               {items.title}
             </h2>
             <span
@@ -63,11 +70,11 @@ const MenuItems = ({ items, depthLevel }) => {
                 width="16"
                 height="16"
                 fill="currentColor"
-                class="bi bi-chevron-down"
+                className="bi bi-chevron-down"
                 viewBox="0 0 16 16"
               >
                 <path
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"
                 />
               </svg>
@@ -79,10 +86,14 @@ const MenuItems = ({ items, depthLevel }) => {
               {items.icon}
             </div>
             <div className="bg-red">
-              <h2 className="w-1/2 flex justify-start font-medium">
+              <h2
+                className="w-1/2 flex justify-start font-medium"
+                style={{
+                  color: openMenuIndex === depthLevel ? "white" : "#2C2D5B",
+                }}
+              >
                 {items.title}
-              </h2>{" "}
-              {/* Modifique a fonte para mais grossa aqui */}
+              </h2>
             </div>
           </>
         )}
