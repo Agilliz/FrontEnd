@@ -1,4 +1,4 @@
-import React, { useState, createContext, useEffect } from 'react';
+import React, { useState, createContext } from 'react';
 import api from '../../../api';
 import FormularioColaborador from './FormularioColaborador';
 import { toast } from 'react-toastify';
@@ -7,7 +7,7 @@ export const multiStepContext = createContext();
 
 const StepContextColaborador = ({ conteudo, setModal }) => {
   const [currentStep, setStep] = useState(1);
-  const [userData, setUserData] = useState({
+  const [userData, setUserData] = useState(conteudo || {
     nomeColaborador: '',
     rg: '',
     cpf: '',
@@ -15,16 +15,9 @@ const StepContextColaborador = ({ conteudo, setModal }) => {
     dataAdmissao: '',
     classeCarteira: '',
     emailColaborador: '',
-    senhaColaborador: '',
-    telefoneColaborador: ''
+    senhaColaborador: ''
   });
   const [finalData, setFinalData] = useState([]);
-
-  useEffect(() => {
-    if (conteudo) {
-      setUserData(conteudo);
-    }
-  }, [conteudo]);
 
   const config = {
     headers: {
@@ -34,32 +27,28 @@ const StepContextColaborador = ({ conteudo, setModal }) => {
 
   function submitData() {
     setFinalData(finalData => [...finalData, userData]);
-    console.log('conteudo:', conteudo);
-    console.log('userData:', userData);
-    
-    if (!userData.idColaborador) {
-      cadastrarColaborador();
-    } else {
-      atualizarColaborador();
-    }
+
+    if (!conteudo) cadastrarColaborador();
+    else atualizarColaborador();
+
     setModal(false);
   }
 
   function atualizarColaborador() {
-    api.put(`http://localhost:8080/funcionario/alterar/${userData.idColaborador}`, {
-      nomeColaborador: userData.nomeColaborador,
-      cpf: userData.cpf,
-      rg: userData.rg,
-      classeCarteira: userData.classeCarteira,
-      dataNascimento: userData.dataNascimento,
-      emailColaborador: userData.emailColaborador,
-      senhaColaborador: userData.senhaColaborador,
-      dataAdmissao: userData.dataAdmissao,
-      telefoneColaborador: userData.telefoneColaborador
-    }, config)
+    api.put(`unidade/alterar/${userData.idUnidade}`, {
+      rua: userData.rua,
+      cep: userData.cep,
+      numero: userData.numero,
+      digitosVerificadores: userData.digitosVerificadores,
+      telefoneUnidade: userData.telefoneUnidade
+    }, {
+      auth: {
+        username: 'agilizDev',
+        password: '850d6c98-8e09-4325-b419-8ca5c7f97dd5'
+      }
+    })
     .then((res) => {
       toast.success('Usuário atualizado');
-      window.location.reload();
       console.log(res);
     })
     .catch((error) => {
@@ -69,9 +58,9 @@ const StepContextColaborador = ({ conteudo, setModal }) => {
   }
 
   function cadastrarColaborador() {
-    console.log(userData); // Removed JSON.stringify
+    console.log(JSON.stringify(userData) + " aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 
-    api.post('http://localhost:8080/funcionario/cadastrar', {
+    api.post('funcionario/cadastrar', {
       nomeColaborador: userData.nomeColaborador,
       cpf: userData.cpf,
       rg: userData.rg,
@@ -84,7 +73,6 @@ const StepContextColaborador = ({ conteudo, setModal }) => {
     }, config)
     .then((res) => {
       toast.success('Usuário cadastrado!');
-      window.location.reload();
       console.log(res);
     })
     .catch((error) => {
@@ -100,8 +88,7 @@ const StepContextColaborador = ({ conteudo, setModal }) => {
         dataAdmissao: '',
         classeCarteira: '',
         emailColaborador: '',
-        senhaColaborador: '',
-        telefoneColaborador: ''
+        senhaColaborador: ''
       });
       setStep(1);
     });
