@@ -1,7 +1,7 @@
 import React from "react";
 import Rotas from "./routes";
 import Navbar from './components/Navbar/Navbar';
-import Header from './components/Header';
+import Header from './components/Header/Header';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import Login from "./pages/Login/Login";

@@ -16,7 +16,7 @@ const Navbar = () => {
     
     <header className="desktop-nav w-1/6 h-full">
       <Logo />
-      <ul className="menus flex flex-col justify-evenly h-4/6">
+      <ul className="menus flex flex-col justify-evenly h-4/6 font-semibold " style={{color: "#2C2D5B"}}>
         <li onClick={() => navigate("/")}><h2>Acompanhamento</h2></li>
         {menuItemsData.map((menu, index) => {
           return <MenuItems  items={menu} key={index} />;
@@ -28,6 +28,8 @@ const Navbar = () => {
           return <MenuItems items={menu} key={index} />
         })}
       </ul>
+
+
     </header>
   )
 }
