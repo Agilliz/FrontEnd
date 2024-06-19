@@ -3,11 +3,12 @@ import { FaTrashCan } from "react-icons/fa6";
 import api from "../../api";
 import Modal from "../Modal";
 import styles from "./TabelaColaborador.module.css";
+import { toast } from 'react-toastify';
 
 const TabelaColaborador = () => {
     const [listaFuncionarios, setListaFuncionarios] = useState([]);
     const [openModal, setModal] = useState(false);
-    const [colaborador, setColaborador] = useState();
+    const [colaborador, setColaborador] = useState(null);
     const [confirmModalOpen, setConfirmModalOpen] = useState(false);
     const [colaboradorToDelete, setColaboradorToDelete] = useState(null);
 
@@ -17,47 +18,47 @@ const TabelaColaborador = () => {
         }
     };
 
-    useEffect(() => {
+    const carregarFuncionarios = () => {
         api.get('http://localhost:8080/funcionario/', config)
             .then((res) => {
                 setListaFuncionarios(res.data.data.content);
-                console.log(listaFuncionarios);
             })
             .catch((error) => {
                 console.log(error);
             });
+    };
+    
+    useEffect(() => {
+        carregarFuncionarios(); // Chamar a função correta para carregar os funcionários
     }, []);
+    
 
     function alterarColaborador(colaborador) {
         setColaborador(colaborador);
-        setModal(!openModal);
+        setModal(true);
     }
 
     function handleDeleteClick(colaborador) {
         setColaboradorToDelete(colaborador);
         setConfirmModalOpen(true);
     }
-
+    
     function confirmDelete() {
-        if (!colaboradorToDelete) {
-            console.error("No colaborador to delete");
-            return;
-        }
-    
-        const { id } = colaboradorToDelete;
-    
-        api.delete(`http://localhost:8080/funcionario/deletar/${id}`, config)
+        api.delete(`http://localhost:8080/funcionario/deletar/${colaboradorToDelete.idColaborador}`, config)
             .then((res) => {
-                setListaFuncionarios(listaFuncionarios.filter(func => func.id !== id));
-                setConfirmModalOpen(false);
-                setColaboradorToDelete(null);
+                toast.success("Colaborador excluído");
+                carregarFuncionarios(); // Recarregar a lista após exclusão
             })
             .catch((error) => {
-                console.error("Error deleting colaborador:", error);
+                toast.error("Erro ao excluir o colaborador");
+                console.log("erro", error);
+            })
+            .finally(() => {
+                setConfirmModalOpen(false);
+                setColaboradorToDelete(null);
             });
     }
 
-    console.log('lista : ' + JSON.stringify(listaFuncionarios));
 
     return (
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg p-4 pt-0 bg-agi max-h-[500px] overflow-y-scroll">
@@ -87,7 +88,7 @@ const TabelaColaborador = () => {
                     </thead>
                     <tbody>
                         {listaFuncionarios.map(func => (
-                            <tr key={func.id} className="odd:bg-white even:bg-gray-50 border-b">
+                            <tr key={func.idColaborador} className="odd:bg-white even:bg-gray-50 border-b">
                                 <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                     {func.nomeColaborador}
                                 </th>
@@ -116,7 +117,7 @@ const TabelaColaborador = () => {
                     </tbody>
                 </table>
             </div>
-            <Modal conteudo={colaborador} isOpen={openModal} setModalOpen={() => setModal(!openModal)} tipo="colaborador" setModal={setModal}/>
+            <Modal conteudo={colaborador} isOpen={openModal} setModalOpen={() => setModal(false)} tipo="colaborador" setModal={setModal} />
             {confirmModalOpen && (
                 <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">
                     <div className="bg-white p-6 rounded-lg shadow-lg">

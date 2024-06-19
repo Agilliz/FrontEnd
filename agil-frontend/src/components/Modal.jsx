@@ -12,13 +12,13 @@ const Modal = ({ isOpen, setModalOpen, conteudo, cliente, setModal, tipo }) => {
             <AiOutlineClose />
           </span>
           {tipo === 'colaborador' ? 
-            <StepContextColaborador conteudo={cliente} setModal={setModal}>
+            <StepContextColaborador conteudo={conteudo} setModal={setModal}>
               <div className='p-4'>
                 {conteudo}
               </div>
             </StepContextColaborador>
           : 
-            <StepContextCliente conteudo={cliente} setModal={setModal}>
+            <StepContextCliente conteudo={conteudo} setModal={setModal}>
               <div className='p-4'>
                 {conteudo}
               </div>

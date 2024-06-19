@@ -1,4 +1,4 @@
-import React, { useState, createContext } from 'react';
+import React, { useState, createContext, useEffect } from 'react';
 import api from '../../../api';
 import FormularioColaborador from './FormularioColaborador';
 import { toast } from 'react-toastify';
@@ -7,7 +7,7 @@ export const multiStepContext = createContext();
 
 const StepContextColaborador = ({ conteudo, setModal }) => {
   const [currentStep, setStep] = useState(1);
-  const [userData, setUserData] = useState(conteudo || {
+  const [userData, setUserData] = useState({
     nomeColaborador: '',
     rg: '',
     cpf: '',
@@ -15,9 +15,16 @@ const StepContextColaborador = ({ conteudo, setModal }) => {
     dataAdmissao: '',
     classeCarteira: '',
     emailColaborador: '',
-    senhaColaborador: ''
+    senhaColaborador: '',
+    telefoneColaborador: ''
   });
   const [finalData, setFinalData] = useState([]);
+
+  useEffect(() => {
+    if (conteudo) {
+      setUserData(conteudo);
+    }
+  }, [conteudo]);
 
   const config = {
     headers: {
@@ -27,15 +34,19 @@ const StepContextColaborador = ({ conteudo, setModal }) => {
 
   function submitData() {
     setFinalData(finalData => [...finalData, userData]);
-
-    if (!conteudo) cadastrarColaborador();
-    else atualizarColaborador();
-
+    console.log('conteudo:', conteudo);
+    console.log('userData:', userData);
+    
+    if (!userData.idColaborador) {
+      cadastrarColaborador();
+    } else {
+      atualizarColaborador();
+    }
     setModal(false);
   }
 
   function atualizarColaborador() {
-    api.put('http://localhost:8080/funcionario/alterar/', {
+    api.put(`http://localhost:8080/funcionario/alterar/${userData.idColaborador}`, {
       nomeColaborador: userData.nomeColaborador,
       cpf: userData.cpf,
       rg: userData.rg,
@@ -48,6 +59,7 @@ const StepContextColaborador = ({ conteudo, setModal }) => {
     }, config)
     .then((res) => {
       toast.success('Usuário atualizado');
+      window.location.reload();
       console.log(res);
     })
     .catch((error) => {
@@ -57,10 +69,8 @@ const StepContextColaborador = ({ conteudo, setModal }) => {
   }
 
   function cadastrarColaborador() {
-    console.log(JSON.stringify(userData) + " aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+    console.log(userData); // Removed JSON.stringify
 
-
-    
     api.post('http://localhost:8080/funcionario/cadastrar', {
       nomeColaborador: userData.nomeColaborador,
       cpf: userData.cpf,
@@ -74,7 +84,7 @@ const StepContextColaborador = ({ conteudo, setModal }) => {
     }, config)
     .then((res) => {
       toast.success('Usuário cadastrado!');
-      setTimeout(window.location.reload(), 5000);
+      window.location.reload();
       console.log(res);
     })
     .catch((error) => {
@@ -90,7 +100,8 @@ const StepContextColaborador = ({ conteudo, setModal }) => {
         dataAdmissao: '',
         classeCarteira: '',
         emailColaborador: '',
-        senhaColaborador: ''
+        senhaColaborador: '',
+        telefoneColaborador: ''
       });
       setStep(1);
     });

@@ -9,6 +9,8 @@ const FormularioColaborador = () => {
 
   return (
     <form className='pt-8'>
+      <div className='p-4'>
+
       <strong className='text-agilzorange'>Dados pessoais</strong>
       <div className="grid md:grid-cols-2 md:gap-6 pt-4">
         <Input label="Nome" size="relative z-0 mb-5 group" value={userData.nomeColaborador} onChange={(e) => setUserData({...userData, nomeColaborador: e.target.value})} />
@@ -20,6 +22,7 @@ const FormularioColaborador = () => {
         <Input label="Email" value={userData.emailColaborador} onChange={(e) => setUserData({...userData, emailColaborador: e.target.value})} />
         <Input label="Senha" value={userData.senhaColaborador} onChange={(e) => setUserData({...userData, senhaColaborador: e.target.value})} />
         <Input label="Telefone" value={userData.telefoneColaborador} onChange={(e) => setUserData({...userData, telefoneColaborador: e.target.value})} />
+      </div>
       </div>
       <div className='flex justify-center items-center w-full'>
         <Button label="Salvar" color="bg-agilzorange" onClick={submitData} />
