@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
@@ -53,6 +54,63 @@ jobs:
 
       - name: Unzip artifact for deployment
         run: unzip release.zip
+=======
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: Build and deploy Node.js app to Azure Web App - Agil-Logistics-App
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js version
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+
+      - name: npm install, build, and test
+        run: |
+          npm install
+          npm run build --if-present
+          npm run test --if-present
+
+      - name: Zip artifact for deployment
+        run: zip release.zip ./* -r
+
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v3
+        with:
+          name: node-app
+          path: release.zip
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: 'Production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+    permissions:
+      id-token: write #This is required for requesting the JWT
+
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v3
+        with:
+          name: node-app
+
+      - name: Unzip artifact for deployment
+        run: unzip release.zip
+>>>>>>> 3df88dc5a65a899a6d82964f9cd1fdb70a3338e5
       
       - name: Login to Azure
         uses: azure/login@v1
@@ -60,6 +118,7 @@ jobs:
           client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_9D980A57C0F4455683201A623355F0DB }}
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_CEF71FE407D240D5A2483569674F3025 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_EF65A3A6507F492DA49B0ED40C1B7E56 }}
+<<<<<<< HEAD
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
@@ -68,4 +127,14 @@ jobs:
           app-name: 'Agil-Logistics-App'
           slot-name: 'Production'
           package: .
+=======
+
+      - name: 'Deploy to Azure Web App'
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'Agil-Logistics-App'
+          slot-name: 'Production'
+          package: .
+>>>>>>> 3df88dc5a65a899a6d82964f9cd1fdb70a3338e5
           
