@@ -1,23 +1,22 @@
 import React, { useState, useEffect, useRef } from "react";
 import Dropdown from "./Dropdown";
 
-
 const MenuItems = ({ items, depthLevel }) => {
   const [openMenuIndex, setOpenMenuIndex] = useState(null);
   let ref = useRef();
 
   useEffect(() => {
     const handler = (event) => {
-      if (
-        openMenuIndex !== null &&
-        ref.current &&
-        !ref.current.contains(event.target)
-      ) {
-        setOpenMenuIndex(null);
+      if (openMenuIndex !== null && ref.current && !ref.current.contains(event.target)) {
+        setTimeout(() => {
+          setOpenMenuIndex(null);
+        }, 0); // Tempo de transição de 1000ms
       }
     };
+
     document.addEventListener("mousedown", handler);
     document.addEventListener("touchstart", handler);
+
     return () => {
       document.removeEventListener("mousedown", handler);
       document.removeEventListener("touchstart", handler);
@@ -28,16 +27,16 @@ const MenuItems = ({ items, depthLevel }) => {
     setOpenMenuIndex(openMenuIndex === index ? null : index);
   };
 
+  const submenuMargin = items.submenu ? `${items.submenu.length * 12}%` : '0';
+
+
   return (
     <li
-      className={`menu-item w-90 flex items-center flex-col pt-2 mb-5 ${
-        openMenuIndex === depthLevel
-          ? "item-transition"
-          : "item-transition-reverse"
-      }`}
+      className={`menu-item w-90 flex items-center flex-col pt-2 mb-5 ${openMenuIndex === depthLevel ? "item-transition margin-add" : " margin-remove"}`}
       style={{
-        transition: "max-height 0.3s ease-in-out",
-        maxHeight: openMenuIndex === depthLevel ? "300px" : "0px",
+        transition: openMenuIndex === depthLevel ? "max-height 200ms ease-in-out" : "max-height 700ms ease-in-out" , 
+        maxHeight: openMenuIndex === depthLevel ? "10%" : "0px",
+        '--submenu-margin': submenuMargin 
       }}
       ref={ref}
     >
@@ -64,11 +63,11 @@ const MenuItems = ({ items, depthLevel }) => {
             </h2>
             <span
               id={`arrow-${depthLevel}`}
-              className={`h-full items-center w-3/12 flex justify-center transform pt-0 ${
-                openMenuIndex === depthLevel
-                  ? "rotate-180 transition-transform duration-500"
-                  : "transition-transform duration-300"
-              }`}
+              className={`h-full items-center w-3/12 flex justify-center transform pt-0 ${openMenuIndex === depthLevel ? "rotate-180 transition-transform duration-400" : "transition-transform duration-300"}`}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleMenuClick(depthLevel);
+              }}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
