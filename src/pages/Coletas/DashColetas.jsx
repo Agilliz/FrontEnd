@@ -10,6 +10,7 @@ import ContainerDataComButton from "./ComponentesDash/ContainerDataComBtn/Contai
 import GraficoLinha from "../../components/Graficos/GraficoLinhaHora";
 import GraficoBar from "../../components/Graficos/GraficoBar";
 import Caminhao from "../../components/caminhaoLoading/caminhaoLoading";
+import Loading from "../../components/Loading/Loading"
 
 async function procurarDados() {
   const config = {
@@ -69,7 +70,7 @@ function Home() {
   if (loading) {
     return (
       <div className="w-full h-full flex justify-center items-center">
-        <Caminhao />
+        <Loading />
       </div>
     );
   }

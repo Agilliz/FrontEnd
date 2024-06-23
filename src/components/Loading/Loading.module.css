@@ -1,0 +1,23 @@
+.css-doodle-container {
+    position: relative;
+    height: 100vh;
+    background-color: #2C2D5B;
+    overflow: hidden;
+  }
+  
+  .css-doodle-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url(../../images/file.png) no-repeat center center;
+    background-size: contain;
+    animation: m 4s linear infinite;
+  }
+  
+  @keyframes m {
+    0%, 50%, 90% { transform: scale(1); opacity: 1; }
+    25%, 75%, 100% { transform: scale(0); opacity: 0; }
+  }
+  

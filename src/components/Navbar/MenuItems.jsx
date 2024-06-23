@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
 import Dropdown from "./Dropdown";
+
 
 const MenuItems = ({ items, depthLevel }) => {
   const [openMenuIndex, setOpenMenuIndex] = useState(null);
@@ -30,15 +30,19 @@ const MenuItems = ({ items, depthLevel }) => {
 
   return (
     <li
-      className={`menu-item w-5/6 flex items-center flex-col pt-2 ${
+      className={`menu-item w-90 flex items-center flex-col pt-2 mb-5 ${
         openMenuIndex === depthLevel
           ? "item-transition"
           : "item-transition-reverse"
       }`}
+      style={{
+        transition: "max-height 0.3s ease-in-out",
+        maxHeight: openMenuIndex === depthLevel ? "300px" : "0px",
+      }}
       ref={ref}
     >
       <button
-        className="menu-item-button flex w-full h-full"
+        className="flex w-full h-full"
         onClick={() => handleMenuClick(depthLevel)}
         style={{
           color: openMenuIndex === depthLevel ? "white" : "#2C2D5B",
@@ -50,16 +54,17 @@ const MenuItems = ({ items, depthLevel }) => {
               {items.icon}
             </div>
             <h2
-              className="w-6/12 flex justify-start items-center h-full font-semibold p-3 pt-2"
+              className={`w-6/12 flex justify-left items-center h-full font-bold`}
               style={{
                 color: openMenuIndex === depthLevel ? "white" : "#2C2D5B",
+                padding: openMenuIndex === depthLevel ? "5% 5%" : "0",
               }}
             >
               {items.title}
             </h2>
             <span
               id={`arrow-${depthLevel}`}
-              className={`h-full items-center w-3/12 flex justify-center transform ${
+              className={`h-full items-center w-3/12 flex justify-center transform pt-0 ${
                 openMenuIndex === depthLevel
                   ? "rotate-180 transition-transform duration-500"
                   : "transition-transform duration-300"
@@ -85,13 +90,8 @@ const MenuItems = ({ items, depthLevel }) => {
             <div className="w-3/12 flex items-center justify-center h-full">
               {items.icon}
             </div>
-            <div className="bg-red">
-              <h2
-                className="w-1/2 flex justify-start font-medium"
-                style={{
-                  color: openMenuIndex === depthLevel ? "white" : "#2C2D5B",
-                }}
-              >
+            <div>
+              <h2 className="w-1/2 flex justify-start font-medium">
                 {items.title}
               </h2>
             </div>

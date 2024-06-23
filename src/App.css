@@ -14,6 +14,7 @@ header {
 }
 
 
+
 .nav-area {
   display: flex;
   align-items: center;
@@ -26,6 +27,13 @@ header {
   font-size: 25px;
   color: inherit;
   margin-right: 20px;
+}
+
+.desktop-nav{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 /* menu on desktop */
@@ -41,32 +49,21 @@ header {
   font-size: 14px;
 }
 
-.desktop-nav .menu-items a {
-  display: block;
-  font-size: inherit;
-  color: #2C2D5B;
-  text-decoration: none;
-}
-
-.desktop-nav .menu-items button {
+.menu-items a{
   display: flex;
-  align-items: center;
-  color: #2C2D5B;
-  font-size: inherit;
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
   width: 100%;
 }
 
+
 .desktop-nav button span {
   margin-left: 3px;
+  
 }
 
 .desktop-nav .menu-items > a,
 .desktop-nav .menu-items button {
   text-align: left;
-  ;
+
 }
 
 .desktop-nav .menu-items a:hover,
@@ -74,15 +71,6 @@ header {
   background-color: #f2f2f2;
 }
 
-.desktop-nav .arrow::after {
-  content: "";
-  display: inline-block;
-  margin-left: 0.28em;
-  vertical-align: 0.09em;
-  border-top: 0.42em solid;
-  border-right: 0.32em solid transparent;
-  border-left: 0.32em solid transparent;
-}
 
 .desktop-nav .dropdown {
   font-size: 0.875rem;
@@ -98,12 +86,67 @@ header {
 
 .desktop-nav .dropdown.show {
   display: block;
+  z-index: 1;
+}
+.menu-items {
+  opacity: 0;
+  animation: dropdown 300ms ease-out;
+}
+
+.dropdown.show .menu-items {
+  opacity: 1;
+  transform: translateY(0%);
+  transition: opacity 0.3s ease-in, transform 0.3s ease-in;
+}
+
+
+
+.dropdown.hide .menu-items {
+  opacity: 0;
+  animation: dropup 100ms ease-out;
+}
+
+@keyframes dropdown {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  50%{
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+@keyframes dropup {
+  0% {
+    opacity: 1;
+    transform: translateY(100%);
+  }
+  80% {
+    transform: translateY(0%);
+    opacity: 0;
+  }
+  100% {
+    display: none;
+  }
+}
+
+
+
+.w-90{
+  width: 90%;
+
 }
 
 
 
 
+
+
 .item-transition {
+  transition: background-color 400ms ease-out, color 400ms ease-out;
   transition: background-color 400ms ease-out, color 400ms ease-out;
   background-color: #DE6600;
   color: white;
