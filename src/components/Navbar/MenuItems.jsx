@@ -3,7 +3,7 @@ import Dropdown from "./Dropdown";
 
 const MenuItems = ({ items, depthLevel }) => {
   const [openMenuIndex, setOpenMenuIndex] = useState(null);
-  let ref = useRef();
+  const ref = useRef();
 
   useEffect(() => {
     const handler = (event) => {
@@ -14,7 +14,7 @@ const MenuItems = ({ items, depthLevel }) => {
       ) {
         setTimeout(() => {
           setOpenMenuIndex(null);
-        }, 0); // Tempo de transição de 1000ms
+        }, 0);
       }
     };
 
@@ -38,12 +38,12 @@ const MenuItems = ({ items, depthLevel }) => {
       className={`menu-item w-90 flex items-center flex-col pt-2 mb-5 ${
         openMenuIndex === depthLevel
           ? "item-transition margin-add"
-          : " margin-remove"
+          : "item-transition-reverse margin-remove"
       }`}
       style={{
         transition:
           openMenuIndex === depthLevel
-            ? "max-height 200ms ease-in-out"
+            ? "max-height 300ms ease-in-out"
             : "max-height 700ms ease-in-out",
         maxHeight: openMenuIndex === depthLevel ? "10%" : "0px",
         "--submenu-margin": submenuMargin,

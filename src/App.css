@@ -92,7 +92,7 @@ header {
 
 .dropdown.hide .menu-items {
   opacity: 0;
-  transform: translateY(-100%);
+  transform: translateY(-200%);
   color: #2c2d5b28;
 }
 
@@ -104,14 +104,6 @@ header {
   width: 90%;
 }
 
-.margin-add {
-  margin-bottom: var(--submenu-margin);
-}
-
-.margin-remove {
-  animation: delay 500ms ease-in-out;
-}
-
 @keyframes delay {
   0% {
     margin-bottom: var(--submenu-margin);
@@ -120,9 +112,53 @@ header {
     margin-bottom: 10%;
   }
 }
+.margin-add {
+  margin-bottom: var(--submenu-margin);
+  animation: add-margin 200ms ease-in-out forwards, add-bg 300ms ease-in-out forwards;
+}
+
+.margin-remove {
+  animation: remove-margin 320ms ease-in-out forwards, remove-bg 230ms ease-in-out forwards;
+}
+
+@keyframes add-margin {
+  from {
+    margin-bottom: 0;
+  }
+  to {
+    margin-bottom: var(--submenu-margin);
+  }
+}
+
+@keyframes remove-margin {
+  from {
+    margin-bottom: var(--submenu-margin);
+  }
+  to {
+    margin-bottom: 0;
+  }
+}
+
+@keyframes add-bg {
+  from {
+    background-color: white;
+  }
+  to {
+    background-color: #de6600;
+  }
+}
+
+@keyframes remove-bg {
+  from {
+    background-color: #de6600;
+  }
+  to {
+    background-color: white;
+  }
+}
 
 .item-transition {
-  transition: background-color 500ms ease-out, color 500ms ease-out;
+  transition: color 500ms ease-out, border-top-left-radius 500ms ease-out, border-top-right-radius 500ms ease-out;
   background-color: #de6600;
   color: white;
   border-top-left-radius: 0.5rem;
@@ -130,12 +166,15 @@ header {
 }
 
 .item-transition-reverse {
-  transition: background-color 700ms ease-out, color 500ms ease-out;
+  transition: color 500ms ease-out, border-top-left-radius 500ms ease-out, border-top-right-radius 500ms ease-out;
   background-color: white;
   color: black;
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
 }
+
+
+
 
 #arrow {
   transition: transform 5s ease;
