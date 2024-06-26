@@ -28,7 +28,7 @@ const StepContextCliente = ({ conteudo, setModal }) => {
       'Authorization': `Bearer ${sessionStorage.getItem('tk')}`
     }
   };
-
+ 
   function submitData() {
     setFinalData(finalData => [...finalData, userData]);
 
@@ -69,7 +69,7 @@ const StepContextCliente = ({ conteudo, setModal }) => {
       });
   };
 
-
+  
 
   const cadastrarCliente = () => {
     api.post('http://localhost:8080/unidade/cadastrar', {
@@ -93,7 +93,7 @@ const StepContextCliente = ({ conteudo, setModal }) => {
       setModal(false);
   };
 
-
+  
 
   const deletarCliente = (idCliente) => {
     api.delete(`http://localhost:8080/unidade/deletar/${idCliente}`, config)

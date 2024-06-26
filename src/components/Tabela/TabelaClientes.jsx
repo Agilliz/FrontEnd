@@ -33,7 +33,7 @@ const Tabela = () => {
      }, []);
 
 
-
+      
     function alterarCliente(cliente) {
         setCliente(cliente);
         setModal(true);
@@ -43,7 +43,7 @@ const Tabela = () => {
         setClienteToDelete(cliente);
         setConfirmModalOpen(true);
     }
-
+    
     function confirmDelete() {
         api.delete(`http://localhost:8080/unidade/deletar/${clienteToDelete.idCliente}`, config)
             .then((res) => {
@@ -61,6 +61,7 @@ const Tabela = () => {
     }
 
     return (
+
         
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg p-4">
             <table className="w-full text-sm text-left rtl:text-right text-gray-500 ">
@@ -112,7 +113,7 @@ const Tabela = () => {
                 <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">
                     <div className="bg-white p-6 rounded-lg shadow-lg">
                         <h2 className="text-lg font-bold mb-4">Confirmação</h2>
-                        <p className="mb-4">Tem certeza que deseja excluir o colaborador?</p>
+                        <p className="mb-4">Tem certeza que deseja excluir o cliente?</p>
                         <div className="flex justify-end">
                             <button onClick={() => setConfirmModalOpen(false)} className="bg-gray-500 text-white px-4 py-2 rounded mr-2">Não</button>
                             <button onClick={confirmDelete} className="bg-red-600 text-white px-4 py-2 rounded">Sim</button>
@@ -123,4 +124,5 @@ const Tabela = () => {
         </div>
     );
 }
+
 export default Tabela;
