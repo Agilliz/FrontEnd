@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "apexcharts": "^3.49.1",
     "axios": "^1.6.8",
+    "css-doodle": "^0.39.2",
     "dompurify": "^3.0.11",
     "react": "^18.2.0",
     "react-awesome-reveal": "^4.2.10",

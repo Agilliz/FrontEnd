@@ -19,7 +19,7 @@ const TabelaColaborador = () => {
     };
 
     const carregarFuncionarios = () => {
-        api.get('http://localhost:8080/funcionario/', config)
+        api.get('http://localhost:8080/funcionario', config)
             .then((res) => {
                 setListaFuncionarios(res.data.data.content);
             })
