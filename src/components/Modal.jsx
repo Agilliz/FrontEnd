@@ -2,7 +2,6 @@ import React from 'react';
 import { AiOutlineClose } from "react-icons/ai";
 import StepContextColaborador from './Formulario/FormularioColaborador/StepContext';
 import StepContextCliente from './Formulario/FormularioCliente/StepContext';
-
 const Modal = ({ isOpen, setModalOpen, conteudo, cliente, setModal, tipo }) => {
   if (isOpen) {
     return (
@@ -14,13 +13,13 @@ const Modal = ({ isOpen, setModalOpen, conteudo, cliente, setModal, tipo }) => {
           {tipo === 'colaborador' ? 
             <StepContextColaborador conteudo={conteudo} setModal={setModal}>
               <div className='p-4'>
-                {cliente}
+                {conteudo}
               </div>
             </StepContextColaborador>
           : 
             <StepContextCliente conteudo={conteudo} setModal={setModal}>
               <div className='p-4'>
-                {cliente}
+                {conteudo}
               </div>
             </StepContextCliente>
           }
@@ -28,8 +27,6 @@ const Modal = ({ isOpen, setModalOpen, conteudo, cliente, setModal, tipo }) => {
       </div>
     );
   }
-
   return null;
 }
-
 export default Modal;

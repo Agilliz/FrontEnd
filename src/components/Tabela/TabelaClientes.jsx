@@ -3,55 +3,61 @@ import { FaTrashCan } from "react-icons/fa6";
 import api from "../../api";
 import { toast } from 'react-toastify';
 import Modal from '../Modal';
+import styles from "./TabelaCliente.module.css";
 
 const Tabela = () => {
     const [openModal, setModal] = useState(false);
     const [cliente, setCliente] = useState({});
     const [listaClientes, setListaClientes] = useState([]);
+    const [confirmModalOpen, setConfirmModalOpen] = useState(false);
+    const [clienteToDelete, setClienteToDelete] = useState(null);
 
-    console.log('cliente' + cliente );
-    console.log('listaCliente' + listaClientes);
+    const config = {
+        headers: {
+            'Authorization': `Bearer ${sessionStorage.getItem('tk')}`
+        }
+    };
 
+    const carregarClientes = () => {
+        api.get('http://localhost:8080/unidade/', config)
+            .then((res) => {
+                setListaClientes(res.data.data.content);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
 
      useEffect(() => {
-        api.get('unidade/', {
-            auth: {
-                username: 'agilizDev',
-                password: '850d6c98-8e09-4325-b419-8ca5c7f97dd5'
-            }
-        })
-        .then((res) => {
-            setListaClientes(res.data.data.content);
-            console.log( listaClientes);
-        })
-        .catch((error) => {
-            console.log(error);
-        });
-    }, []);
+        carregarClientes();
+     }, []);
 
-    function deletarCliente(idUnidade){
 
-        
-
-        api.delete(`unidade/deletar/${idUnidade}`, {
-            auth: {
-                username: 'agilizDev',
-                password: '850d6c98-8e09-4325-b419-8ca5c7f97dd5'
-            }
-        })
-        .then(() => {
-            toast.success('Cliente deletado com sucesso');
-        })
-        .catch(() => {
-            toast.error('Erro ao deletar o cliente');
-        });
-
-        window.location.reload();
+      
+    function alterarCliente(cliente) {
+        setCliente(cliente);
+        setModal(true);
     }
 
-    function alterarCliente(unidade){
-        setCliente(unidade)
-        setModal(!openModal);
+    function handleDeleteClick(cliente) {
+        setClienteToDelete(cliente);
+        setConfirmModalOpen(true);
+    }
+    
+    function confirmDelete() {
+        api.delete(`http://localhost:8080/unidade/deletar/${clienteToDelete.idCliente}`, config)
+            .then((res) => {
+                toast.success("Cliente excluído");
+                carregarClientes(); // Recarregar a lista após exclusão
+            })
+            .catch((error) => {
+                toast.error("Erro ao excluir o cliente");
+                console.log("erro", error);
+            })
+            .finally(() => {
+                setConfirmModalOpen(false);
+                setClienteToDelete(null);
+            });
     }
 
     return (
@@ -60,18 +66,21 @@ const Tabela = () => {
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg p-4">
             <table className="w-full text-sm text-left rtl:text-right text-gray-500 ">
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50">
-                    <tr>
+                    <tr className={styles["sticky-header"]}>
                         <th scope="col" className="px-6 py-3">
                             CEP
                         </th>
                         <th scope="col" className="px-6 py-3">
-                            RUA
+                            Rua
                         </th>
                         <th scope="col" className="px-6 py-3">
-                            NÚMERO
+                            Número
                         </th>
                         <th scope="col" className="px-6 py-3">
-                            TELEFONE
+                            Telefone
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                            Ações
                         </th>
                     </tr>
                 </thead>
@@ -92,16 +101,26 @@ const Tabela = () => {
                             </td>
 
                             <td className="px-6 py-4 flex justify-around">
-                            <div href="#" className="font-medium text-blue-600  hover:underline flex justify-center items-center rounded-lg ">Visualizar</div>
                                 <div href="#" className="font-medium text-white bg-orange-500 hover:underline flex justify-center items-center rounded-lg " onClick={() => alterarCliente(cliente)}><h2 className='p-2'>Alterar</h2></div>
-                                <div href="#" className="font-medium bg-red-600 text-white hover:underline flex justify-center items-center rounded-lg cursor-pointer" onClick={() => deletarCliente(cliente.idUnidade)}><span className='p-2'><FaTrashCan /></span></div>
+                                <div href="#" className="font-medium bg-red-600 text-white hover:underline flex justify-center items-center rounded-lg cursor-pointer" onClick={() => handleDeleteClick(cliente)}><span className='p-2'><FaTrashCan /></span></div>
                                 </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
             <Modal setModal={setModal} conteudo={cliente} cliente={cliente} isOpen={openModal} setModalOpen={() => setModal(!openModal)}/>
-
+            {confirmModalOpen && (
+                <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">
+                    <div className="bg-white p-6 rounded-lg shadow-lg">
+                        <h2 className="text-lg font-bold mb-4">Confirmação</h2>
+                        <p className="mb-4">Tem certeza que deseja excluir o cliente?</p>
+                        <div className="flex justify-end">
+                            <button onClick={() => setConfirmModalOpen(false)} className="bg-gray-500 text-white px-4 py-2 rounded mr-2">Não</button>
+                            <button onClick={confirmDelete} className="bg-red-600 text-white px-4 py-2 rounded">Sim</button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
